@@ -1,5 +1,5 @@
 # P1 test runner: sends the 30 test leads to the live webhook and compares Claude's answers with the expected ones.
-$dir    = '.	est-data'
+$dir    = $PSScriptRoot
 $url    = 'https://YOUR-N8N-INSTANCE.app.n8n.cloud/webhook/p1-lead-intake-test'
 $secret = $env:P1_WEBHOOK_SECRET  # set this in your session; never commit the value
 $leads  = Get-Content "$dir\leads.json" -Raw -Encoding UTF8 | ConvertFrom-Json
