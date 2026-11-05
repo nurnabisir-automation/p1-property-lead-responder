@@ -1,0 +1,692 @@
+[
+  {
+    "id": "T01",
+    "input": {
+      "source": "form",
+      "name": "Emily Carter",
+      "email": "emily.carter@example.com",
+      "phone": "+1 512 555 0142",
+      "message": "Hi, I'm looking to buy a 3 bed house near Zilker in Austin, budget around $650k. I'm pre-approved with my lender and hoping to close within 6 weeks. Can I book a showing this weekend?"
+    },
+    "expected": {
+      "country": "United States",
+      "language": "en",
+      "buy_or_rent": "buy",
+      "area": "Zilker, Austin",
+      "budget": 650000,
+      "currency": "USD",
+      "timeline": "within 6 weeks",
+      "score": "1-5",
+      "is_spam": false,
+      "is_duplicate": false,
+      "is_valid": true
+    }
+  },
+  {
+    "id": "T02",
+    "input": {
+      "source": "portal_email",
+      "name": "Marcus Johnson",
+      "email": "marcus.johnson@example.com",
+      "phone": "+1 718 555 0178",
+      "message": "New enquiry for listing #88231: 2BR apartment in Park Slope, Brooklyn. Is it still available? Looking for a lease starting Jan 1. Max rent $3,200/month. Please send details on the broker fee."
+    },
+    "expected": {
+      "country": "United States",
+      "language": "en",
+      "buy_or_rent": "rent",
+      "area": "Park Slope, Brooklyn",
+      "budget": 3200,
+      "currency": "USD",
+      "timeline": "lease starting 1 January",
+      "score": "1-5",
+      "is_spam": false,
+      "is_duplicate": false,
+      "is_valid": true
+    }
+  },
+  {
+    "id": "T03",
+    "input": {
+      "source": "form",
+      "name": "Emily Carter",
+      "email": "emily.carter@example.com",
+      "phone": "+1 512 555 0142",
+      "message": "Following up on my earlier enquiry. We've increased our budget to $700k and would also like to see houses in Hyde Park. Still planning to close within 6 weeks. Any showings on Saturday?"
+    },
+    "expected": {
+      "country": "United States",
+      "language": "en",
+      "buy_or_rent": "buy",
+      "area": "Zilker, Hyde Park, Austin",
+      "budget": 700000,
+      "currency": "USD",
+      "timeline": "within 6 weeks",
+      "score": "1-5",
+      "is_spam": false,
+      "is_duplicate": true,
+      "is_valid": true
+    }
+  },
+  {
+    "id": "T04",
+    "input": {
+      "source": "form",
+      "name": "Liam Tremblay",
+      "email": "liam.tremblay@example.com",
+      "phone": "+1 416 555 0123",
+      "message": "Hello, my partner and I want to buy a 2 bedroom condo in Leslieville, Toronto, up to $820,000 CAD. We're not in a rush, probably within the next 6 months. Do you have any showings coming up?"
+    },
+    "expected": {
+      "country": "Canada",
+      "language": "en",
+      "buy_or_rent": "buy",
+      "area": "Leslieville, Toronto",
+      "budget": 820000,
+      "currency": "CAD",
+      "timeline": "within 6 months",
+      "score": "2-3",
+      "is_spam": false,
+      "is_duplicate": false,
+      "is_valid": true
+    }
+  },
+  {
+    "id": "T05",
+    "input": {
+      "source": "portal_email",
+      "name": "Priya Sharma",
+      "email": "priya.sharma@example.com",
+      "phone": "+1 604 555 0166",
+      "message": "Enquiry about the 1 bed rental in Kitsilano, Vancouver. Budget is $2,800/month. I need to move in by Dec 1 because my current lease ends. Can I see it this week?"
+    },
+    "expected": {
+      "country": "Canada",
+      "language": "en",
+      "buy_or_rent": "rent",
+      "area": "Kitsilano, Vancouver",
+      "budget": 2800,
+      "currency": "CAD",
+      "timeline": "by 1 December",
+      "score": "1-5",
+      "is_spam": false,
+      "is_duplicate": false,
+      "is_valid": true
+    }
+  },
+  {
+    "id": "T06",
+    "input": {
+      "source": "form",
+      "name": "Oliver Hughes",
+      "email": "oliver.hughes@example.com",
+      "phone": "+44 7700 900123",
+      "message": "Hi, looking to buy a 2 bed flat in Clapham, budget up to £750,000. I'm chain-free with a mortgage agreed in principle. Could I arrange a viewing this week?"
+    },
+    "expected": {
+      "country": "United Kingdom",
+      "language": "en",
+      "buy_or_rent": "buy",
+      "area": "Clapham, London",
+      "budget": 750000,
+      "currency": "GBP",
+      "timeline": "this week",
+      "score": "1-5",
+      "is_spam": false,
+      "is_duplicate": false,
+      "is_valid": true
+    }
+  },
+  {
+    "id": "T07",
+    "input": {
+      "source": "portal_email",
+      "name": "Charlotte Evans",
+      "email": "charlotte.evans@example.com",
+      "phone": "+44 7700 900456",
+      "message": "Enquiry about the 2 bed flat to let in Didsbury. Rent is £1,400 pcm. Is it still available and when can I view? I'm looking to move in early December."
+    },
+    "expected": {
+      "country": "United Kingdom",
+      "language": "en",
+      "buy_or_rent": "rent",
+      "area": "Didsbury, Manchester",
+      "budget": 1400,
+      "currency": "GBP",
+      "timeline": "early December",
+      "score": "1-5",
+      "is_spam": false,
+      "is_duplicate": false,
+      "is_valid": true
+    }
+  },
+  {
+    "id": "T08",
+    "input": {
+      "source": "form",
+      "name": "Callum MacLeod",
+      "email": "callum.macleod@example.com",
+      "phone": "",
+      "message": "Hello, I'm thinking about buying a family home in Morningside at some point. What are prices like at the moment?"
+    },
+    "expected": {
+      "country": "United Kingdom",
+      "language": "en",
+      "buy_or_rent": "buy",
+      "area": "Morningside, Edinburgh",
+      "budget": null,
+      "currency": "GBP",
+      "timeline": null,
+      "score": "1-5",
+      "is_spam": false,
+      "is_duplicate": false,
+      "is_valid": true
+    }
+  },
+  {
+    "id": "T09",
+    "input": {
+      "source": "form",
+      "name": "Aoife Murphy",
+      "email": "aoife.murphy@example.com",
+      "phone": "+353 85 555 0000",
+      "message": "Hi, I'm looking for a 2 bed apartment to rent in Rathmines, Dublin 6, up to €2,200 a month. I need it from 1st January. Can I get a viewing?"
+    },
+    "expected": {
+      "country": "Ireland",
+      "language": "en",
+      "buy_or_rent": "rent",
+      "area": "Rathmines, Dublin 6",
+      "budget": 2200,
+      "currency": "EUR",
+      "timeline": "from 1 January",
+      "score": "1-5",
+      "is_spam": false,
+      "is_duplicate": false,
+      "is_valid": true
+    }
+  },
+  {
+    "id": "T10",
+    "input": {
+      "source": "portal_email",
+      "name": "Conor Byrne",
+      "email": "conor.byrne@example.com",
+      "phone": "+353 87 000 0000",
+      "message": "Enquiry re: 3 bed semi-detached in Douglas, Cork. Our budget is €385,000 and we have approval in principle. Could you send the BER details and let us know if we can view on Saturday?"
+    },
+    "expected": {
+      "country": "Ireland",
+      "language": "en",
+      "buy_or_rent": "buy",
+      "area": "Douglas, Cork",
+      "budget": 385000,
+      "currency": "EUR",
+      "timeline": "viewing on Saturday",
+      "score": "1-5",
+      "is_spam": false,
+      "is_duplicate": false,
+      "is_valid": true
+    }
+  },
+  {
+    "id": "T11",
+    "input": {
+      "source": "form",
+      "name": "Lukas Schneider",
+      "email": "lukas.schneider@example.com",
+      "phone": "+49 151 5550 0000",
+      "message": "Guten Tag, wir suchen eine 3-Zimmer-Wohnung zum Kauf in Prenzlauer Berg, Budget bis 650.000 Euro. Wir möchten in etwa 3 Monaten umziehen. Ist eine Besichtigung nächste Woche möglich?"
+    },
+    "expected": {
+      "country": "Germany",
+      "language": "de",
+      "buy_or_rent": "buy",
+      "area": "Prenzlauer Berg, Berlin",
+      "budget": 650000,
+      "currency": "EUR",
+      "timeline": "in about 3 months",
+      "score": "1-5",
+      "is_spam": false,
+      "is_duplicate": false,
+      "is_valid": true
+    }
+  },
+  {
+    "id": "T12",
+    "input": {
+      "source": "portal_email",
+      "name": "Hannah Fischer",
+      "email": "hannah.fischer@example.com",
+      "phone": "+49 170 000 0000",
+      "message": "Enquiry for the 2-room flat in Schwabing, Munich. Warm rent max €1,800. I'd like to move in by 1 February. Is a viewing possible next week?"
+    },
+    "expected": {
+      "country": "Germany",
+      "language": "en",
+      "buy_or_rent": "rent",
+      "area": "Schwabing, Munich",
+      "budget": 1800,
+      "currency": "EUR",
+      "timeline": "by 1 February",
+      "score": "1-5",
+      "is_spam": false,
+      "is_duplicate": false,
+      "is_valid": true
+    }
+  },
+  {
+    "id": "T13",
+    "input": {
+      "source": "form",
+      "name": "Jonas Weber",
+      "email": "jonas.weber@example.com",
+      "phone": "",
+      "message": "Hello, I'm interested in buying an apartment in Eppendorf, Hamburg as an investment. Please send some options."
+    },
+    "expected": {
+      "country": "Germany",
+      "language": "en",
+      "buy_or_rent": "buy",
+      "area": "Eppendorf, Hamburg",
+      "budget": null,
+      "currency": "EUR",
+      "timeline": null,
+      "score": "2-3",
+      "is_spam": false,
+      "is_duplicate": false,
+      "is_valid": true
+    }
+  },
+  {
+    "id": "T14",
+    "input": {
+      "source": "form",
+      "name": "Sanne de Vries",
+      "email": "sanne.devries@example.com",
+      "phone": "+31 6 5550 0000",
+      "message": "Goedemiddag, ik zoek een appartement te huur in De Pijp, Amsterdam, maximaal €1.900 per maand. Ik wil graag per 1 december verhuizen. Kan ik een bezichtiging plannen?"
+    },
+    "expected": {
+      "country": "Netherlands",
+      "language": "nl",
+      "buy_or_rent": "rent",
+      "area": "De Pijp, Amsterdam",
+      "budget": 1900,
+      "currency": "EUR",
+      "timeline": "from 1 December",
+      "score": "1-5",
+      "is_spam": false,
+      "is_duplicate": false,
+      "is_valid": true
+    }
+  },
+  {
+    "id": "T15",
+    "input": {
+      "source": "portal_email",
+      "name": "Daan Bakker",
+      "email": "daan.bakker@example.com",
+      "phone": "+31 6 000 0000",
+      "message": "Enquiry about the 3-room apartment in Kralingen, Rotterdam. We are expat buyers with a budget around €425,000 and would like a viewing within two weeks. What are the VvE costs?"
+    },
+    "expected": {
+      "country": "Netherlands",
+      "language": "en",
+      "buy_or_rent": "buy",
+      "area": "Kralingen, Rotterdam",
+      "budget": 425000,
+      "currency": "EUR",
+      "timeline": "viewing within two weeks",
+      "score": "1-5",
+      "is_spam": false,
+      "is_duplicate": false,
+      "is_valid": true
+    }
+  },
+  {
+    "id": "T16",
+    "input": {
+      "source": "form",
+      "name": "Omar Haddad",
+      "email": "omar.haddad@example.com",
+      "phone": "+971 50 555 0000",
+      "message": "Hi, I am looking to buy a 2 bedroom apartment in Dubai Marina, budget AED 1.8 million. I am a cash buyer and ready to move quickly. Please arrange a viewing this week."
+    },
+    "expected": {
+      "country": "United Arab Emirates",
+      "language": "en",
+      "buy_or_rent": "buy",
+      "area": "Dubai Marina",
+      "budget": 1800000,
+      "currency": "AED",
+      "timeline": "this week",
+      "score": "1-5",
+      "is_spam": false,
+      "is_duplicate": false,
+      "is_valid": true
+    }
+  },
+  {
+    "id": "T17",
+    "input": {
+      "source": "portal_email",
+      "name": "Natalia Petrova",
+      "email": "natalia.petrova@example.com",
+      "phone": "+971 55 000 0000",
+      "message": "Enquiry for 1 bed in Downtown Dubai, listing ref DXB-2231. Budget AED 140,000 per year, can pay in 2 cheques. Planning to move in about a month."
+    },
+    "expected": {
+      "country": "United Arab Emirates",
+      "language": "en",
+      "buy_or_rent": "rent",
+      "area": "Downtown Dubai",
+      "budget": 140000,
+      "currency": "AED",
+      "timeline": "in about a month",
+      "score": "1-5",
+      "is_spam": false,
+      "is_duplicate": false,
+      "is_valid": true
+    }
+  },
+  {
+    "id": "T18",
+    "input": {
+      "source": "portal_email",
+      "name": "Omar Haddad",
+      "email": "omar.haddad@example.com",
+      "phone": "+971 50 555 0000",
+      "message": "Additional enquiry: I am also interested in a 2 bedroom in Business Bay, same budget of AED 1.8 million. Can the viewing include both areas?"
+    },
+    "expected": {
+      "country": "United Arab Emirates",
+      "language": "en",
+      "buy_or_rent": "buy",
+      "area": "Dubai Marina, Business Bay",
+      "budget": 1800000,
+      "currency": "AED",
+      "timeline": null,
+      "score": "1-5",
+      "is_spam": false,
+      "is_duplicate": true,
+      "is_valid": true
+    }
+  },
+  {
+    "id": "T19",
+    "input": {
+      "source": "form",
+      "name": "فهد العتيبي",
+      "email": "fahad.alotaibi@example.com",
+      "phone": "+966 50 555 0000",
+      "message": "السلام عليكم، أبحث عن فيلا للإيجار في حي العليا بالرياض. الميزانية حوالي 120,000 ريال سنويا. أحتاج الانتقال خلال شهرين. هل يمكن ترتيب معاينة؟"
+    },
+    "expected": {
+      "country": "Saudi Arabia",
+      "language": "ar",
+      "buy_or_rent": "rent",
+      "area": "Al Olaya, Riyadh",
+      "budget": 120000,
+      "currency": "SAR",
+      "timeline": "within 2 months",
+      "score": "1-5",
+      "is_spam": false,
+      "is_duplicate": false,
+      "is_valid": true
+    }
+  },
+  {
+    "id": "T20",
+    "input": {
+      "source": "form",
+      "name": "Khalid Al-Ghamdi",
+      "email": "khalid.alghamdi@example.com",
+      "phone": "+966 55 000 0000",
+      "message": "Hello, I want to buy a villa in Al Hamra district, Jeddah. Budget is around SAR 1.5 million. I hope to complete the purchase this year. Please send available listings and arrange a viewing."
+    },
+    "expected": {
+      "country": "Saudi Arabia",
+      "language": "en",
+      "buy_or_rent": "buy",
+      "area": "Al Hamra, Jeddah",
+      "budget": 1500000,
+      "currency": "SAR",
+      "timeline": "this year",
+      "score": "1-5",
+      "is_spam": false,
+      "is_duplicate": false,
+      "is_valid": true
+    }
+  },
+  {
+    "id": "T21",
+    "input": {
+      "source": "form",
+      "name": "Wei Ling Tan",
+      "email": "weiling.tan@example.com",
+      "phone": "+65 8555 0000",
+      "message": "Hi, looking to rent a 4-room HDB in Tampines, budget S$3,200 a month. Lease to start 1 December. Can we arrange a viewing this weekend?"
+    },
+    "expected": {
+      "country": "Singapore",
+      "language": "en",
+      "buy_or_rent": "rent",
+      "area": "Tampines",
+      "budget": 3200,
+      "currency": "SGD",
+      "timeline": "lease from 1 December",
+      "score": "1-5",
+      "is_spam": false,
+      "is_duplicate": false,
+      "is_valid": true
+    }
+  },
+  {
+    "id": "T22",
+    "input": {
+      "source": "form",
+      "name": "Prize Desk",
+      "email": "promo.winner@example.com",
+      "phone": "",
+      "message": "CONGRATULATIONS!!! You have been selected to win a FREE luxury holiday and S$10,000 cash. Click http://example.com/claim-now within 24 hours to receive your prize. Limited offer!!!"
+    },
+    "expected": {
+      "country": "Singapore",
+      "language": "en",
+      "buy_or_rent": null,
+      "area": null,
+      "budget": null,
+      "currency": null,
+      "timeline": null,
+      "score": "1-5",
+      "is_spam": true,
+      "is_duplicate": false,
+      "is_valid": true
+    }
+  },
+  {
+    "id": "T23",
+    "input": {
+      "source": "form",
+      "name": "Arjun Mehta",
+      "email": "arjun.mehta@example.com",
+      "phone": "+91 98000 00000",
+      "message": "Looking to buy a 3 BHK in Bandra West, Mumbai, budget up to ₹5 crore. RERA registered projects only. I plan to close within a month. Can we schedule a site visit this weekend?"
+    },
+    "expected": {
+      "country": "India",
+      "language": "en",
+      "buy_or_rent": "buy",
+      "area": "Bandra West, Mumbai",
+      "budget": 50000000,
+      "currency": "INR",
+      "timeline": "within a month",
+      "score": "1-5",
+      "is_spam": false,
+      "is_duplicate": false,
+      "is_valid": true
+    }
+  },
+  {
+    "id": "T24",
+    "input": {
+      "source": "form",
+      "name": "Ananya Iyer",
+      "email": "ananya.iyer@example.com",
+      "phone": "+91 99000 00000",
+      "message": "Need a 2 BHK for rent near Whitefield, around 45k per month. Moving sometime next quarter."
+    },
+    "expected": {
+      "country": "India",
+      "language": "en",
+      "buy_or_rent": "rent",
+      "area": "Whitefield, Bengaluru",
+      "budget": 45000,
+      "currency": "INR",
+      "timeline": "next quarter",
+      "score": "2-3",
+      "is_spam": false,
+      "is_duplicate": false,
+      "is_valid": true
+    }
+  },
+  {
+    "id": "T25",
+    "input": {
+      "source": "form",
+      "name": "Rank Boost Team",
+      "email": "seo.boost@example.com",
+      "phone": "+91 97000 00000",
+      "message": "Dear Sir/Madam, we can put your real estate website on #1 of Google in 7 days. 100% guaranteed, cheap price, only $99. Reply on WhatsApp now to get your free audit."
+    },
+    "expected": {
+      "country": "India",
+      "language": "en",
+      "buy_or_rent": null,
+      "area": null,
+      "budget": null,
+      "currency": null,
+      "timeline": null,
+      "score": "1-5",
+      "is_spam": true,
+      "is_duplicate": false,
+      "is_valid": true
+    }
+  },
+  {
+    "id": "T26",
+    "input": {
+      "source": "form",
+      "name": "Isabella Rossi",
+      "email": "isabella.rossi@example.com",
+      "phone": "+61 491 570 006",
+      "message": "Hi, we're looking to buy a 2 bedroom unit in Bondi, up to $1.2m. Keen to attend an inspection or open home this Saturday. We're pre-approved with our bank."
+    },
+    "expected": {
+      "country": "Australia",
+      "language": "en",
+      "buy_or_rent": "buy",
+      "area": "Bondi, Sydney",
+      "budget": 1200000,
+      "currency": "AUD",
+      "timeline": "inspection this Saturday",
+      "score": "1-5",
+      "is_spam": false,
+      "is_duplicate": false,
+      "is_valid": true
+    }
+  },
+  {
+    "id": "T27",
+    "input": {
+      "source": "portal_email",
+      "name": "Jack Thompson",
+      "email": null,
+      "phone": "+61 491 570 158",
+      "message": "Enquiry for the 3 bedroom house for rent in Paddington, Brisbane, $850 per week. Happy to attend an inspection this Saturday. Please call me back."
+    },
+    "expected": {
+      "country": "Australia",
+      "language": "en",
+      "buy_or_rent": "rent",
+      "area": "Paddington, Brisbane",
+      "budget": 850,
+      "currency": "AUD",
+      "timeline": "inspection this Saturday",
+      "score": "1-5",
+      "is_spam": false,
+      "is_duplicate": false,
+      "is_valid": false
+    }
+  },
+  {
+    "id": "T28",
+    "input": {
+      "source": "form",
+      "name": "Isabella Rossi",
+      "email": "isabella.rossi@example.com",
+      "phone": "+61 491 570 006",
+      "message": "Hi again, following up on my enquiry. We'd also like to look at Bronte and Tamarama, and our budget has gone up to $1.3m. We want to buy within the next 2 months."
+    },
+    "expected": {
+      "country": "Australia",
+      "language": "en",
+      "buy_or_rent": "buy",
+      "area": "Bondi, Bronte, Tamarama, Sydney",
+      "budget": 1300000,
+      "currency": "AUD",
+      "timeline": "within 2 months",
+      "score": "1-5",
+      "is_spam": false,
+      "is_duplicate": true,
+      "is_valid": true
+    }
+  },
+  {
+    "id": "T29",
+    "input": {
+      "source": "form",
+      "name": "Tane Williams",
+      "email": "tane.williams@example.com",
+      "phone": "+64 21 555 0000",
+      "message": "Kia ora, I'm keen to buy a 3 bedroom townhouse in Ponsonby, budget around $1.45 million. I'm looking to buy in the next 3 months. Are there any open homes this weekend?"
+    },
+    "expected": {
+      "country": "New Zealand",
+      "language": "en",
+      "buy_or_rent": "buy",
+      "area": "Ponsonby, Auckland",
+      "budget": 1450000,
+      "currency": "NZD",
+      "timeline": "within 3 months",
+      "score": "1-5",
+      "is_spam": false,
+      "is_duplicate": false,
+      "is_valid": true
+    }
+  },
+  {
+    "id": "T30",
+    "input": {
+      "source": "portal_email",
+      "name": "Mia Walker",
+      "email": null,
+      "phone": "+64 21 000 0000",
+      "message": "Do you have any rentals in Kelburn? Moving around January."
+    },
+    "expected": {
+      "country": "New Zealand",
+      "language": "en",
+      "buy_or_rent": "rent",
+      "area": "Kelburn, Wellington",
+      "budget": null,
+      "currency": "NZD",
+      "timeline": "around January",
+      "score": "2-3",
+      "is_spam": false,
+      "is_duplicate": false,
+      "is_valid": false
+    }
+  }
+]

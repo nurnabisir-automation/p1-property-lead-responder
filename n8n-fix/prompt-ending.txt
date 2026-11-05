@@ -1,0 +1,4 @@
+Return exactly this format and nothing else. No markdown, no code fences, no JSON:
+SUBJECT: <subject line>
+BODY:
+<email body>

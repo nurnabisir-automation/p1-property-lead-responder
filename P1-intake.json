@@ -1,0 +1,831 @@
+{
+  "name": "P1 Lead Responder - Intake",
+  "nodes": [
+    {
+      "parameters": {
+        "formTitle": "Property enquiry",
+        "formDescription": "Tell us what you are looking for and we will reply within minutes.",
+        "formFields": {
+          "values": [
+            {
+              "fieldLabel": "Full name",
+              "requiredField": true
+            },
+            {
+              "fieldLabel": "Email",
+              "fieldType": "email",
+              "requiredField": true
+            },
+            {
+              "fieldLabel": "Phone"
+            },
+            {
+              "fieldLabel": "Buy or rent",
+              "fieldType": "dropdown",
+              "fieldOptions": {
+                "values": [
+                  {
+                    "option": "Buy"
+                  },
+                  {
+                    "option": "Rent"
+                  },
+                  {
+                    "option": "Not sure"
+                  }
+                ]
+              },
+              "requiredField": true
+            },
+            {
+              "fieldLabel": "Message",
+              "fieldType": "textarea",
+              "requiredField": true
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.formTrigger",
+      "typeVersion": 2.6,
+      "position": [
+        -256,
+        32
+      ],
+      "id": "47c767ae-9300-4782-8656-e03057a82916",
+      "name": "On form submission"
+    },
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "p1-lead-intake",
+        "authentication": "headerAuth",
+        "responseMode": "lastNode",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2.2,
+      "position": [
+        -256,
+        224
+      ],
+      "id": "b1b785a5-0878-4560-bf3c-cff5e6ccb2a3",
+      "name": "Webhook"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "2e01f322-8a4f-4316-9058-0e9f86054cd5",
+              "name": "name",
+              "value": "={{ $json['Full name'] }}",
+              "type": "string"
+            },
+            {
+              "id": "66ce848a-4da9-4a58-86e9-c24930b812d1",
+              "name": "email",
+              "value": "={{ $json.Email }}",
+              "type": "string"
+            },
+            {
+              "id": "f6adb9de-ecc8-4a99-8ef4-a065407684e5",
+              "name": "phone",
+              "value": "={{ $json.Phone }}",
+              "type": "string"
+            },
+            {
+              "id": "fe5f8d71-09a6-4c41-819d-80d1752852fb",
+              "name": "buy_or_rent",
+              "value": "={{ $json['Buy or rent'] }}",
+              "type": "string"
+            },
+            {
+              "id": "238ed367-6c7e-4ddd-bc5c-885433d36483",
+              "name": "message",
+              "value": "={{ $json.Message }}",
+              "type": "string"
+            },
+            {
+              "id": "c61d09b0-a9b3-4d35-978e-193e1abbe117",
+              "name": "received_at",
+              "value": "={{ $json.submittedAt }}",
+              "type": "string"
+            },
+            {
+              "id": "46cbfe13-100e-4796-8a84-e02129752c89",
+              "name": "source ",
+              "value": "form",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.5,
+      "position": [
+        -32,
+        32
+      ],
+      "id": "546d5c0c-d653-4771-9a5d-77b65811cc49",
+      "name": "Normalise Form"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "93a39058-d9c3-4e66-b6d0-4c80846d0ab6",
+              "name": "name",
+              "value": "={{ $json.body['Full name'] }}",
+              "type": "string"
+            },
+            {
+              "id": "4d0ac9e2-2c98-4e07-bc30-78b771dcb498",
+              "name": "email",
+              "value": "={{ $json.body.Email }}",
+              "type": "string"
+            },
+            {
+              "id": "6d994b6a-d69a-43b5-bfc0-644a64bc68e8",
+              "name": "phone",
+              "value": "={{ $json.body.Phone }}",
+              "type": "string"
+            },
+            {
+              "id": "20a5fccd-ff5f-4e70-b1f5-7aaf6f31591b",
+              "name": "buy_or_rent",
+              "value": "={{ $json.body['Buy or rent'] }}",
+              "type": "string"
+            },
+            {
+              "id": "2b5c56c1-c22a-4eec-8140-56d62a376ebb",
+              "name": "message",
+              "value": "={{ $json.body.Message }}",
+              "type": "string"
+            },
+            {
+              "id": "dcd42f86-2f07-49f8-8d0f-c64e2638ff73",
+              "name": "received_at",
+              "value": "={{ $now.toISO() }}",
+              "type": "string"
+            },
+            {
+              "id": "b1d8a1a0-17d3-4699-b8f4-8252618dc9a6",
+              "name": "source",
+              "value": "webhook",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.5,
+      "position": [
+        -32,
+        224
+      ],
+      "id": "8a619ce3-baf0-4108-902e-00c454ca8bf9",
+      "name": "Normalise Webhook"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 4
+          },
+          "conditions": [
+            {
+              "id": "7d2ba014-f5e7-46c6-981c-52b5f24810ec",
+              "leftValue": "={{ $json.name }}",
+              "rightValue": "",
+              "operator": {
+                "type": "string",
+                "operation": "notEmpty",
+                "singleValue": true
+              }
+            },
+            {
+              "id": "ef8e7a84-a2ca-4db7-b65b-a5fc3776f3c2",
+              "leftValue": "={{ $json.message }}",
+              "rightValue": "",
+              "operator": {
+                "type": "string",
+                "operation": "notEmpty",
+                "singleValue": true
+              }
+            },
+            {
+              "id": "22a9566d-7dbd-47c6-8b0b-cf1782acef0a",
+              "leftValue": "={{ $json.email }}",
+              "rightValue": "^[^\\s@]+@[^\\s@]+\\.[^\\s@]{2,}$",
+              "operator": {
+                "type": "string",
+                "operation": "regex"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.4,
+      "position": [
+        192,
+        128
+      ],
+      "id": "ee2279b6-9920-41b5-b88c-fdec5b24ff2b",
+      "name": "Valid lead?"
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=You qualify property enquiries for a real estate agency. Read the enquiry and extract these fields:\n- language: the language the message is written in, as a 2-letter code (en, ar, es, fr...)\n- buy_or_rent: \"buy\", \"rent\" or \"unknown\". Use the message first; if it is unclear, use the form choice.\n- area: the suburb, neighbourhood or community mentioned, or \"\" if none\n- budget: - budget: a number only (e.g. 1200000), or 0 if not given\n- currency: 3-letter code (CAD, AED, USD...), or \"\" if unknown\n- timeline: when they want to buy or move, in their words, or \"\"\n- urgency: 1 (just browsing) to 5 (ready now, clear budget and short timeline)\n- is_spam: true if it is spam, advertising, nonsense or not a real property enquiry\n\nForm choice:{{ $json.buy_or_rent }}\nMessage: {{ $json.message }}",
+        "hasOutputParser": true,
+        "messages": {
+          "messageValues": []
+        },
+        "batching": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.chainLlm",
+      "typeVersion": 1.9,
+      "position": [
+        416,
+        128
+      ],
+      "id": "47517f14-65d5-482b-a6de-e727334eb3a1",
+      "name": "Claude Qualify"
+    },
+    {
+      "parameters": {
+        "model": {
+          "__rl": true,
+          "value": "claude-haiku-5-5",
+          "mode": "list",
+          "cachedResultName": "Claude Haiku 5.5"
+        },
+        "options": {
+          "temperature": 0.4
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatAnthropic",
+      "typeVersion": 1.6,
+      "position": [
+        432,
+        352
+      ],
+      "id": "b29afb16-125e-4933-b8bf-93c7e0639d54",
+      "name": "Anthropic Chat Model"
+    },
+    {
+      "parameters": {
+        "jsonSchemaExample": "{\n  \"language\": \"en\",\n  \"buy_or_rent\": \"rent\",\n  \"area\": \"Dubai Marina\",\n  \"budget\": 120000,\n  \"currency\": \"AED\",\n  \"timeline\": \"January\",\n  \"urgency\": 4,\n  \"is_spam\": false\n}"
+      },
+      "type": "@n8n/n8n-nodes-langchain.outputParserStructured",
+      "typeVersion": 1.3,
+      "position": [
+        560,
+        352
+      ],
+      "id": "e40df890-f187-4878-b1ed-68fe59a070b6",
+      "name": "Structured Output Parser"
+    },
+    {
+      "parameters": {
+        "operation": "appendOrUpdate",
+        "documentId": {
+          "__rl": true,
+          "value": "YOUR_GOOGLE_ID",
+          "mode": "list",
+          "cachedResultName": "P1 Lead Responder CRM",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/YOUR_GOOGLE_ID/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "Leads",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/YOUR_GOOGLE_ID/edit#gid=0"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "received_at": "={{ $('Valid lead?').item.json.received_at }}",
+            "source": "={{ $('Valid lead?').item.json.source }}",
+            "name": "={{ $('Valid lead?').item.json.name }}",
+            "email": "={{ $('Valid lead?').item.json.email }}",
+            "phone": "={{ $('Valid lead?').item.json.phone }}",
+            "message": "={{ $('Valid lead?').item.json.message }}",
+            "buy_or_rent": "={{ $json.output.buy_or_rent }}",
+            "area": "={{ $json.output.area }}",
+            "budget": "={{ $json.output.budget }}",
+            "currency": "={{ $json.output.currency }}",
+            "timeline": "={{ $json.output.timeline }}",
+            "language": "={{ $json.output.language }}",
+            "is_spam": "={{ $json.output.is_spam }}",
+            "score": "={{ $json.output.urgency }}",
+            "status": "new"
+          },
+          "matchingColumns": [
+            "email"
+          ],
+          "schema": [
+            {
+              "id": "lead_id",
+              "displayName": "lead_id",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "received_at",
+              "displayName": "received_at",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "source",
+              "displayName": "source",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "country",
+              "displayName": "country",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "timezone",
+              "displayName": "timezone",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "name",
+              "displayName": "name",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "email",
+              "displayName": "email",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "phone",
+              "displayName": "phone",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "buy_or_rent",
+              "displayName": "buy_or_rent",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "area",
+              "displayName": "area",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "budget",
+              "displayName": "budget",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "currency",
+              "displayName": "currency",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "timeline",
+              "displayName": "timeline",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "score",
+              "displayName": "score",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "status",
+              "displayName": "status",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "reply_sent_at",
+              "displayName": "reply_sent_at",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "followup1_at",
+              "displayName": "followup1_at",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "followup2_at",
+              "displayName": "followup2_at",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "replied",
+              "displayName": "replied",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "agent_alerted",
+              "displayName": "agent_alerted",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "message",
+              "displayName": "message",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "language",
+              "displayName": "language",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "is_spam",
+              "displayName": "is_spam",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {
+          "cellFormat": "RAW"
+        }
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        832,
+        272
+      ],
+      "id": "71079429-0b24-4c1c-9990-d744829a6cf7",
+      "name": "Save to CRM"
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=You are the reply assistant for a real estate agency. Write a reply email to a new property enquiry. Follow the style guide exactly.\n\nSTYLE GUIDE\n- Friendly, warm, professional. Under 120 words in the body, greeting and sign-off included.\n- Greet the lead by first name. One short paragraph restating what they want (area, buy or rent, budget, timeline), then one next step: book a time with the booking link.\n- No bullet points, no emojis.\n- Never state or guess prices, rents, fees, availability, addresses or open-home dates. Repeat the budget only in the lead's own currency. If they ask something we don't know, say an agent will confirm it on the call. Never promise a specific viewing time.\n- Reply in the same language the lead wrote in. German: formal \"Sie\". Dutch: formal \"u\". Arabic: polite Modern Standard Arabic.\n- Local wording by country (visit word | currency | date format | other words):\n  United States: showing | USD $ | MM/DD/YYYY | agent, apartment, closing\n  Canada: showing | CAD $ | YYYY-MM-DD | agent, condo, closing\n  United Kingdom: viewing | GBP £ | DD/MM/YYYY | estate agent, flat, completion\n  Ireland: viewing | EUR € | DD/MM/YYYY | estate agent, apartment, sale agreed\n  Australia: inspection | AUD $ | DD/MM/YYYY | agent, unit, settlement\n  New Zealand: viewing | NZD $ | DD/MM/YYYY | agent, open home, settlement\n  United Arab Emirates: viewing | AED | DD/MM/YYYY | agent, apartment, off-plan\n  Saudi Arabia: viewing (معاينة) | SAR | DD/MM/YYYY | agent, apartment, villa\n  India: site visit | INR ₹ (lakh/crore) | DD/MM/YYYY | broker, flat\n  Singapore: viewing | SGD S$ | DD/MM/YYYY | agent, condo, HDB flat\n  Germany: Besichtigung / viewing | EUR € | DD.MM.YYYY | Makler, Wohnung\n  Netherlands: bezichtiging / viewing | EUR € | DD-MM-YYYY | makelaar, appartement\n  Other or unknown: viewing | lead's own currency | month as a word (5 November 2026) | agent\n- Work out the lead's country from the phone country code, the area and the currency. If unsure, use \"Other or unknown\".\n- Structure: greeting with first name; thank them and restate their request in one sentence; \"Pick a time that suits you here: \" followed by the booking link; sign-off \"Kind regards,\" then the agent name and agency name (translate \"Kind regards\" and the booking sentence into the lead's language).\n- Subject line: under 8 words, in the lead's language, e.g. \"Your property enquiry in Zilker, Austin\".\n\nLEAD\nName: {{ $('Valid lead?').item.json.name }}\nPhone: {{ $('Valid lead?').item.json.phone }}\nOriginal message: {{ $('Valid lead?').item.json.message }}\n\nQUALIFICATION\nLanguage: {{ $json.output.language }} \nBuy or rent: {{ $json.output.buy_or_rent }}\nArea: {{ $json.output.area }}\nBudget: {{ $json.output.budget }}\nCurrency: {{ $json.output.currency }}\nTimeline: {{ $json.output.timeline }}\nUrgency (1-5): {{ $json.output.urgency }}\n\nAGENCY\nAgent name: Sarah Lewis\nAgency name: Demo Realty\nBooking link: https://cal.com/nurnabi-automation/property-enquiry-call\n\nReturn only the subject line and the email body. ",
+        "hasOutputParser": true,
+        "batching": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.chainLlm",
+      "typeVersion": 1.9,
+      "position": [
+        768,
+        -128
+      ],
+      "id": "314c16b8-24db-4878-b991-53eed38722a6",
+      "name": "Claude Write Reply"
+    },
+    {
+      "parameters": {
+        "model": {
+          "__rl": true,
+          "value": "claude-haiku-5-5",
+          "mode": "list",
+          "cachedResultName": "Claude Haiku 5.5"
+        },
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatAnthropic",
+      "typeVersion": 1.6,
+      "position": [
+        784,
+        112
+      ],
+      "id": "9eddf37f-06ff-4813-9acd-78c415a73862",
+      "name": "Reply Model"
+    },
+    {
+      "parameters": {
+        "jsonSchemaExample": "{\n  \"subject\": \"Your property enquiry in Oakville\",\n  \"body\": \"Hi Sarah, thank you for your enquiry...\"\n}"
+      },
+      "type": "@n8n/n8n-nodes-langchain.outputParserStructured",
+      "typeVersion": 1.3,
+      "position": [
+        912,
+        112
+      ],
+      "id": "26a58774-163b-4829-8eba-2d6241fa6a1d",
+      "name": "Reply Parser"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "5890662b-20bc-4290-ae82-91f5a291736b",
+              "name": "test_mode",
+              "value": true,
+              "type": "boolean"
+            },
+            {
+              "id": "522a4090-8b62-42dd-bfac-0ad272764a91",
+              "name": "test_inbox",
+              "value": "YOUR_EMAIL",
+              "type": "string"
+            },
+            {
+              "id": "e04e6689-1ae7-4c52-af49-f5a8de3d6505",
+              "name": "lead_email",
+              "value": "={{ $('Valid lead?').item.json.email }}",
+              "type": "string"
+            },
+            {
+              "id": "1302fa40-1b36-4bac-8cb1-b088633de747",
+              "name": "subject",
+              "value": "={{ $json.output.subject }}",
+              "type": "string"
+            },
+            {
+              "id": "cac7df00-adca-46f0-973a-69d9fb7e662a",
+              "name": "body",
+              "value": "={{ $json.output.body }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.5,
+      "position": [
+        1120,
+        -16
+      ],
+      "id": "65cf61c7-f474-4406-ba27-4d0de33a6737",
+      "name": "Email Settings"
+    },
+    {
+      "parameters": {
+        "sendTo": "={{ $json.test_mode ? $json.test_inbox : $json.lead_email }}",
+        "subject": "={{ $json.test_mode ? '[TEST to ' + $json.lead_email + '] ' : '' }}{{ $json.subject }}",
+        "emailType": "text",
+        "message": "={{ $json.body }}",
+        "options": {
+          "appendAttribution": false,
+          "senderName": "Sarah Lewis - Demo Realty"
+        }
+      },
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.2,
+      "position": [
+        1344,
+        -16
+      ],
+      "id": "2ee8f348-d23e-4808-b51b-ca537e8147d2",
+      "name": "Send Reply"
+    }
+  ],
+  "connections": {
+    "On form submission": {
+      "main": [
+        [
+          {
+            "node": "Normalise Form",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Webhook": {
+      "main": [
+        [
+          {
+            "node": "Normalise Webhook",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Normalise Form": {
+      "main": [
+        [
+          {
+            "node": "Valid lead?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Normalise Webhook": {
+      "main": [
+        [
+          {
+            "node": "Valid lead?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Valid lead?": {
+      "main": [
+        [
+          {
+            "node": "Claude Qualify",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Anthropic Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Claude Qualify",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Structured Output Parser": {
+      "ai_outputParser": [
+        [
+          {
+            "node": "Claude Qualify",
+            "type": "ai_outputParser",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Claude Qualify": {
+      "main": [
+        [
+          {
+            "node": "Save to CRM",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Claude Write Reply",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Reply Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Claude Write Reply",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Reply Parser": {
+      "ai_outputParser": [
+        [
+          {
+            "node": "Claude Write Reply",
+            "type": "ai_outputParser",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Claude Write Reply": {
+      "main": [
+        [
+          {
+            "node": "Email Settings",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Email Settings": {
+      "main": [
+        [
+          {
+            "node": "Send Reply",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": true,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate"
+  },
+  "versionId": "2463580b-8bd5-4eeb-a689-c3f41763166b",
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "nodeGroups": [],
+  "id": "eKOmzgQdRMzYkxBy",
+  "tags": []
+}

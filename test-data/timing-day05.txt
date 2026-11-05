@@ -1,0 +1,17 @@
+#  Country      Lang  Submitted  n8n run time  Email arrived  Total  Local wording OK?
+
+1  United States  en  11:18:13  8.95s  11:18  ~10s  yes
+2  United Kingdom  en  11:33:54  9.32s  11:34  ~11s  yes (GBP £, flat; no visit word needed)
+3  Australia  en  11:34:14  9.31s  11:34  ~11s  yes (AUD, inspection, settle)
+4  UAE  en  11:34:33  9.40s  11:34  ~11s  yes (AED, apartment)
+5  India  en  11:34:38  8.50s  11:34  ~10s  yes (₹ crore, flat, site visit)
+6  Ireland  en  11:34:44  10.29s  11:34  ~12s  yes (€, apartment)
+7  Canada  en  11:35:05  9.05s  11:35  ~11s  yes (CAD, condo, showing)
+8  Germany  de  11:35:10  8.57s  11:35  ~10s  yes (German, Sie, €) - note: "Guten Tag Lukas" mixes Sie with first name
+9  Netherlands  nl  11:35:15  8.62s  11:35  ~10s  yes (Dutch, u, €, bezichtiging)
+10 Saudi Arabia  ar  11:35:38  12.29s  11:35  ~14s  yes (Arabic, ريال, معاينة)
+11 Singapore  en  11:35:44  8.32s  11:35  ~10s  yes (S$, condo)
+12 New Zealand  en  11:35:49  9.84s  11:35  ~11s  yes (NZD, open home, settle)
+
+Run times 8.3-12.3s (average about 9.3s); every email arrived within ~15s of submission (target 60s).
+All 12 replies: 49-70 words (limit 120), booking link present, no invented prices or availability.
