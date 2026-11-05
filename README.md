@@ -1,16 +1,18 @@
-\# P1 Property Lead Responder
+# P1 Property Lead Responder
 
 
 
 P1 Property Lead Responder: replies to property enquiries within minutes, qualifies leads, follows up and alerts the agent.
 
+Demo (48 seconds): https://www.loom.com/share/f47a3a2a726042f0add0c233781a0fe7
 
 
 
 
 
 
-\## Problem
+
+## Problem
 
 Property agents often reply to enquiries hours after they arrive. Late replies lose leads to competitors, and staff spend time sorting spam, repeat enquiries and incomplete forms by hand.
 
@@ -18,7 +20,7 @@ Property agents often reply to enquiries hours after they arrive. Late replies l
 
 
 
-\## Diagram
+## Diagram
 
 Website form or webhook
 
@@ -92,7 +94,7 @@ Valid lead?
 
 
 
-\## Setup steps
+## Setup steps
 
 1\. Import the n8n workflow from the project folder, using the exported JSON file.
 
@@ -104,7 +106,7 @@ Valid lead?
 
 
 
-\## Cost per month
+## Cost per month
 
 Example volume: 100 enquiries per month.
 
@@ -120,7 +122,7 @@ Cost per month at 100 leads: about $0.08. At 1,000 leads: about $0.80.
 
 
 
-\## How it handles failure
+## How it handles failure
 
 Invalid leads (missing name, message or a valid email) get a result with is\_valid false and no reply. Spam is logged to the Log sheet and gets no reply. Repeat enquiries update the existing lead and get no second reply. If a reply step fails, the webhook returns an error and the run shows red in n8n Executions.
 
@@ -128,7 +130,7 @@ Invalid leads (missing name, message or a valid email) get a result with is\_val
 
 
 
-\## Known limitations
+## Known limitations
 
 Client country is not captured yet. Reply quality depends on the model, so each reply should be checked during the first weeks. Duplicate replies were tested with 30 sample leads only.
 
